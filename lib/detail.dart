@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'appbar.dart';
 import 'db.dart';
+import 'theme.dart';
 
 Widget buildDetailCard(MovieDB? movie, String link, int index) {
   return Card(
@@ -24,34 +26,38 @@ class DetailMovie extends StatelessWidget {
   Widget build(BuildContext context) {
     final i = ModalRoute.of(context)!.settings.arguments as int;
 
-    return Container(
-        color: Colors.blueGrey,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Card(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.network(link + movie.list[i]['backdrop_path']),
-                Container(
-                  color: Colors.amber,
-                  child: Text(movie.list[i]['original_title']),
-                ),
-                Text(
-                  movie.list[i]['original_language'],
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  movie.list[i]['overview'],
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  movie.list[i]['release_date'],
-                  textAlign: TextAlign.center,
-                ),
-              ],
+    return Scaffold(
+      appBar: const PreferredSize(
+          child: MovieAppBar(), preferredSize: Size.fromHeight(50)),
+      body: Container(
+          color: Colors.blueGrey,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.network(link + movie.list[i]['backdrop_path']),
+                  Container(
+                    color: Colors.amber,
+                    child: Text(movie.list[i]['original_title']),
+                  ),
+                  Text(
+                    movie.list[i]['original_language'],
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    movie.list[i]['overview'],
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    movie.list[i]['release_date'],
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }

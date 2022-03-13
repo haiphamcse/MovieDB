@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:newmoviedb/appbar.dart';
 
 import 'db.dart';
 import 'detail.dart';
 import 'package:get_it/get_it.dart';
+import 'theme.dart';
+
+final theme = MovieDBTheme.light();
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,16 +36,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: theme,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.black54,
-            title: const Text(
-              'MovieDB',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            foregroundColor: Colors.yellow,
-          ),
+          appBar: const PreferredSize(
+              child: MovieAppBar(), preferredSize: Size.fromHeight(50)),
           body: ListView.builder(
               itemCount: i,
               itemBuilder: (BuildContext context, int index) {
